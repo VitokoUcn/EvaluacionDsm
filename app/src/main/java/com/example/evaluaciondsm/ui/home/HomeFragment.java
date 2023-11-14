@@ -1,5 +1,7 @@
 package com.example.evaluaciondsm.ui.home;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -43,8 +45,10 @@ class Producto {
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+
+
     TextView txt_code, txt_description, txt_price;
-    ArrayList<Producto> listaProductos = new ArrayList<>();
+
     
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -95,48 +99,14 @@ public class HomeFragment extends Fragment {
 
     //Metodo para guardar los productos
     public void save() {
-        txt_code = binding.txtCode;
-        txt_description = binding.txtDescription;
-        txt_price = binding.txtPrice;
-        
-        String codigo = binding.txtCode.getText().toString();
-        String descripcion = binding.txtDescription.getText().toString();
-        String precio = binding.txtPrice.getText().toString();
 
-        if (!codigo.isEmpty() && !descripcion.isEmpty() && !precio.isEmpty()) {
-            Producto producto = new Producto(codigo, descripcion, precio);
-            listaProductos.add(producto);
-            cleanForm();
-            Toast.makeText(getContext(), "Producto registrado", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "Debe llenar todos los campos", Toast.LENGTH_SHORT).show();
-        }
 
     }
 
     //Metodo para buscar productos
     public void search() {
-        txt_code = binding.txtCode;
-        txt_description = binding.txtDescription;
-        txt_price = binding.txtPrice;
 
-        String codigo = binding.txtCode.getText().toString();
-        String descripcion = binding.txtDescription.getText().toString();
-        String precio = binding.txtPrice.getText().toString();
 
-        if (!codigo.isEmpty()) {
-            for (int i = 0; i < listaProductos.size(); i++) {
-                if (listaProductos.get(i).getCodigo().equals(codigo)) {
-                    txt_description.setText(listaProductos.get(i).getDescripcion());
-                    txt_price.setText(listaProductos.get(i).getPrecio());
-                    Toast.makeText(getContext(), "Producto encontrado", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "Producto no encontrado", Toast.LENGTH_SHORT).show();
-                }
-            }
-        } else {
-            Toast.makeText(getContext(), "Debe ingresar el codigo del producto", Toast.LENGTH_SHORT).show();
-        }
 
     }
 
